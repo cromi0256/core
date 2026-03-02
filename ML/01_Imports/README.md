@@ -15,5 +15,18 @@
 
 이 과정을 거친후 학습에 쓰일 데이터와 모델 구축에 필요한 라이브러리를 불러온다.
 
+## 코드
+라이브러리 임포트:
+```
+import pandas as pd
+import numpy as np
+from skleran.ensemble import HistGradientBoostingClassifier
+```
+데이터셋 로드:
+```
+TRAIN_PATH = "파일경로"
+df = pd.read_csv(TRAIN_PATH)
+```
+
 ## 관련링크
 [모델 거버넌스(IBM)](https://www.ibm.com/kr-ko/think/topics/model-governance?mhsrc=ibmsearch_a&mhq=%26%23xac70%3B%26%23xbc84%3B%26%23xb10c%3B%26%23xc2a4%3B)
