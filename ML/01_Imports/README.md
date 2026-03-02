@@ -24,8 +24,7 @@ from skleran.ensemble import HistGradientBoostingClassifier
 ```
 데이터셋 로드:
 ```
-TRAIN_PATH = "파일경로"
-df = pd.read_csv(TRAIN_PATH)
+train_df = pd.read_csv(파일경로.csv)
 ```
 
 ## 관련링크
