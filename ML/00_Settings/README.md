@@ -19,5 +19,41 @@
 3. 모델 구축에 쓰일 패키지와 호환되는 파이썬을 가상환경을 통해 설치한다.
 4. 전체 환경에 대한 버전을 기록하고 업데이트 한다.
 
+## 코드
+터미널에서 버전확인:
+```
+python --version
+
+```
+셀에서 하드웨어 확인:
+```
+import psutil
+import platform
+import os
+
+print(f"=== 운영체제 및 시스템 정보 ===")
+print(f"OS: {platform.system()} {platform.release()}")
+print(f"프로세서: {platform.processor()}")
+
+print(f"\n=== CPU 정보 ===")
+print(f"코어 수 (물리): {psutil.cpu_count(logical=False)}")
+print(f"코어 수 (논리): {psutil.cpu_count(logical=True)}")
+print(f"현재 CPU 사용률: {psutil.cpu_percent()}%")
+
+print(f"\n=== 메모리(RAM) 정보 ===")
+mem = psutil.virtual_memory()
+print(f"전체 용량: {mem.total / (1024**3):.2f} GB")
+print(f"사용 중: {mem.used / (1024**3):.2f} GB ({mem.percent}%)")
+
+print(f"\n=== 디스크 정보 ===")
+disk = psutil.disk_usage('/')
+print(f"전체 용량: {disk.total / (1024**3):.2f} GB")
+print(f"사용 중: {disk.used / (1024**3):.2f} GB ({disk.percent}%)")
+```
+현재 환경에 설치된 모든 패키지 정보:
+```
+python -m pip freeze
+```
+
 ## 관련링크
 [파이썬 가상환경 설치](https://docs.python.org/ko/3.14/tutorial/venv.html)
