@@ -23,9 +23,21 @@
 
 ## 코드
 ```
-train_df.info()  # 데이터 크기, 데이터 타입, 결측치 확인
-train_df.describe()
+display(train_df.head())  # 데이터 미리보기
+print(train_df.info())  # 데이터 크기, 데이터 타입, 결측치 확인
+print(train_df.describe(include='all'))  # 기초통계량 확인
+```
+```
+import matplotlib.pyplot as plt
 
+num_cols = train_df.select_dtypes(include='number').columns.tolist()
+cat_cols = train_df.select_dtypes(include='object').columns.tolist()
+
+# 수치형 컬럼 히스토그램
+for col in num_cols:
+  plt.figure(figsize=(12, 8))
+  plt.hist(train_df[col])
+  plt.show()
 ```
 
 ## 관련링크
