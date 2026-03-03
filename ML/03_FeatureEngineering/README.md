@@ -11,7 +11,23 @@
 최근 트렌드로 **AutoML**을 통해 훌륭한 모델을 간단히 만들어낼 수 있다.
 그렇지만 자동화 도구가 특성 엔지니어링만큼은 대체할 수 없다.
 풍부한 도메인 지식으로 수백가지의 특성을 실험하여 강건하고 설명력있는 모델을 만들 수 있기 때문이다.
-머신러닝이란 곧 패턴을 학습시키는 과정이기에 무작위한 시도 보다는 창발적인 아이디어로 문제를 접근하는 해야 할 것이다.
+머신러닝이란 곧 패턴을 학습시키는 과정이기에 창발적인 아이디어로 문제를 접근하는 해야 할 것이다.
+전처리 방식도 여러가지가 있기에 가능한 다양한 방식으로 성능을 검증 해보는 것도 좋다
+
+## 코드
+```
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import OrdinalEncoder, StandardScaler, SimpleImputer
+from sklearn.compose import ColumnTransformer
+
+num_pipeline = make_pipeline(SimpleImputer(strategy='median'), StandardScaler())
+cat_pipeline = make_pipeline(SimpleImputer(strategy='most_frequent'), OrdinalEncoder(handle_unknown=-1))
+
+preprocessing = ColumnTransformer([
+  ("num", num_pipeline, num_cols)  # num_cols 이전코드 참조
+  ("cat", cat_pipeline, cat_cols)
+])
+```
 
 ## 관련링크
 [IBM](https://www.ibm.com/kr-ko/think/topics/feature-engineering#1003835715)
