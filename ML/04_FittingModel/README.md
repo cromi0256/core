@@ -21,16 +21,36 @@
 
 ## 코드
 ```
-from sklesrn.ensemble import HistGradientBoostingClassifier
-from sklearn.model_selection import KFold, cross_validate
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.impute import SimpleImputer
+
+num_cols = [...]
+cat_cols = [...]
+
+preprocessor = ColumnTransformer([
+    ('num', Pipeline([
+        ('imputer', SimpleImputer(strategy='median')),
+        ('scaler', StandardScaler())
+    ]), num_cols),
+    
+    ('cat', Pipeline([
+        ('imputer', SimpleImputer(strategy='most_frequent')),
+        ('encoder', OneHotEncoder(handle_unknown='ignore'))
+    ]), cat_cols)
+])
+
+pipeline = Pipeline([
+    ('preprocess', preprocessor),
+    ('model', HistGradientBoostingClassifier(
+        random_state=42,
+        class_weight='balanced'
+    ))
+])
 
 X = train_df.loc[:, :-1]
 y = train_df.loc[:, -1]
-
-hgb = HistGradientBoostingClassifier(random_state=42, class_weight='balanced')
-5fold = KFold(shuffle=True, random_stae=42)
-
-cv_results = cross_validate(hgb, X, y, cv=5fold)
+cv_results = cross_validate(pipeline, X, y, cv=kf)
 ```
 
 ## 관련링크
