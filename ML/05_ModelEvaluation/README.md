@@ -18,5 +18,35 @@
 또한, 실제 데이터는 시간이 지남에 따라 공변량도 바뀌기에 자연스레 모델성능은 하락한다.
 때문에 모델을 배포한다면 주기적으로 재학습하고 모니터링을 해야한다.
 
+## 코드
+```
+from sklearn.inspection import permutation_importance
+
+...
+print(cv_results)
+
+importances = []
+
+for train_idx, val_idx in kf.split(X):
+    X_train, X_val = X.iloc[train_idx], X.iloc[val_idx]
+    y_train, y_val = y.iloc[train_idx], y.iloc[val_idx]
+    
+    pipeline.fit(X_train, y_train)
+    
+    result = permutation_importance(
+        pipeline,
+        X_val,
+        y_val,
+        n_repeats=10,
+        random_state=42,
+        n_jobs=-1
+    )
+    
+    importances.append(result.importances_mean)
+
+mean_importance = np.mean(importances, axis=0)
+std_importance = np.std(importances, axis=0)
+```
+
 ## 관련링크
 [SHAP](https://shap.readthedocs.io/en/latest/index.html)
