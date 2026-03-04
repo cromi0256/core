@@ -19,5 +19,19 @@
 이 방법은 Kaggle이나 데이콘에서도 유용한 방법이며 작성자 또한 이 방법으로 입상한 경험이 있다.
 머신러닝에서 모델 학습이 중요해보이지만 사실은 좋은 데이터가 좋은 결과를 만드므로, 전처리에 더 신경을 써야한다.
 
+## 코드
+```
+from sklesrn.ensemble import HistGradientBoostingClassifier
+from sklearn.model_selection import KFold, cross_validate
+
+X = train_df.loc[:, :-1]
+y = train_df.loc[:, -1]
+
+hgb = HistGradientBoostingClassifier(random_state=42, class_weight='balanced')
+5fold = KFold(shuffle=True, random_stae=42)
+
+cv_results = cross_validate(hgb, X, y, cv=5fold)
+```
+
 ## 관련링크
 [오토글루온](https://auto.gluon.ai/stable/tutorials/tabular/how-it-works.html)
