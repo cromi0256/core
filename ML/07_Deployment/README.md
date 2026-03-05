@@ -12,3 +12,19 @@ ONNX, pkl등 모델의 가중치와 전처리 코드를 묶어 배포를 한다.
 환경 차이로 인한 에러를 해결하기 위해서는 주로 Docker로 패키지를 이미지로 변환하여 배포한다.
 코드 오류 발생시 원인 파악을 위해 진행 과정마다 로그 기록을 남겨 추적을 쉽게한다.
 또한 입력 데이터에 노이즈가 있다면 재학습 데이터에서 제외하는 등 다양한 상황에서의 적절한 대응을 하도록 자동화 시스템을 구축해야한다.
+
+## 코드
+```
+# 모델.pkl 아티팩트 저장
+from pickle import dump
+with open("filename.pkl", "wb") as f:
+    dump(clf, f, protocol=5)
+
+# 모델.pkl 아티팩트 불러오기
+from pickle import load
+with open("filename.pkl", "rb") as f:
+    clf = load(f)
+```
+
+## 관련링크
+[사이킷런](https://scikit-learn.org/stable/model_persistence.html)
