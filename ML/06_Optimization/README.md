@@ -8,6 +8,8 @@
 만약 추가적으로 모델을 업데이트하고 기능을 추가하려면 Git을 사용하여 버전을 저장하는 것을 추천한다.
 Github은 다른 사람들과 코드와 자료를 주고 받을 수도 있으므로 협업을 하는데 매우 유용하다.
 더 나은 협업과 코드 오류 예방을 위해서는 메타데이터와 주석을 달면 더 좋다.
+또한 mlflow를 사용하면 모델의 개발부터 배포까지의 과정을 관리하기 용이해진다.
+특히, 수십번의 하이퍼파라미터를 조정하는 동안의 결과를 저장하기에 모델선택 시 번거로움이 줄어든다.
 
 ## 코드
 ```
@@ -17,6 +19,14 @@ git commit -m "프로젝트 시작"  # 변경 저장
 git remote add origin https://github.com/...  # 깃헙연동
 git push origin main  # 원격 저장소 업로드
 ```
+```
+!pip install mlflow
 
+import mlflow
+mlflow.set_experiment("프로젝트_이름")
+
+mlflow.sklearn.autolog()
+```
 ## 관련링크
 [git](https://git-scm.com)
+[mlflow](https://mlflow.org)
