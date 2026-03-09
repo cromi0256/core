@@ -4,7 +4,8 @@
 * 맷플롯립 : [공식문서](https://matplotlib.org/stable/tutorials/index) 데이터 시각화에 중요한 기능이 있습니다
 
 ## 머신러닝의 흐름도
-[image_placehold]
+![image](https://github.com/user-attachments/assets/27586e09-3f7c-4e53-868f-9bcced15e829)
+
 
 0. 파이썬 설치 & 패키지 다운로드
 1. 문제정의 / 데이터로드
@@ -17,3 +18,4 @@
 
 ## 관련링크
 [위키독스](https://wikidocs.net/255176)
+[ml-ops](https://ml-ops.org)
