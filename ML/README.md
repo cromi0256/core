@@ -16,6 +16,10 @@
 6. 코드 최적화 / 모델 저장
 7. 모델 배포 & 모니터링
 
+## 프로젝트
+[데이콘 경진대회 수상(Top11)](https://github.com/cromi0256/core/tree/main/ML/%5BProject01%5DDaconCompetitionTop11)
+[처음부터 구축하는 나만의 AutoML]...WIP
+
 ## 관련링크
 [위키독스](https://wikidocs.net/255176)
 [ml-ops](https://ml-ops.org)
