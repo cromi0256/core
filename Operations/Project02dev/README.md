@@ -15,36 +15,52 @@ VSCode에서 실행
 
 1. 파이썬 가상환경 설정
 
-```py -3.13 -m venv venv```
+```PowerShell
+py -3.13 -m venv venv
+```
 
 가상환경 설치
 
-```venv\Scripts\activate```
+```PowerShell
+venv\Scripts\activate
+```
 
 가상환경 활성화
 
-```python --version```
+```PowerShell
+python --version
+```
 
 (파이썬 버전 확인)
 
 2. 패키지 설치
 
-```pip install -U scikit-learn```
+```PowerShellPowerShell
+pip install -U scikit-learn
+```
 
 사이킷런 설치
 
+```PowerShell
+pip install -U mlflow
+```
+
 3. git 연동
-```git init```
+```PowerShell
+git init
+```
 
 git과 연결
 
 (.gitignore은 이미 설정되어 있지만 필요에 따라 생성)
 
-```pip freeze > requirements.txt```
+```PowerShell
+pip freeze > requirements.txt
+```
 
 패키지 목록 저장
 
-```
+```PowerShell
 git add .
 git commit -m "첫 커밋"
 ```
