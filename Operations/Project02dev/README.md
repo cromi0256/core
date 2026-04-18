@@ -241,4 +241,6 @@ http://127.0.0.1:8000/docs.
 ```
 위 링크로 들어가 모델이 제대로 배포되었는지 확인합니다.
 
+![image](https://github.com/cromi0256/core/blob/main/Operations/Project02dev/%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202026-04-18%20223519.png)
+label까지 제대로 출력이 되는군요
 ## 도커 
