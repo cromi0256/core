@@ -181,3 +181,64 @@ mlflow ui
 이후 http://127.0.0.1:5000/ 에서 실험 결과를 볼 수 있습니다.
 
 ## 모델 배포
+```app.py
+from fastapi import FastAPI
+from pydantic import BaseModel
+import pandas as pd
+import joblib
+
+app = FastAPI()
+
+bundle = joblib.load("model.pkl")
+model = bundle["model"]
+le = bundle["label_encoder"]
+
+class InputData(BaseModel):
+    id: int
+    Soil_Type: str
+    Soil_pH: float
+    Soil_Moisture: float
+    Organic_Carbon: float
+    Electrical_Conductivity: float
+    Temperature_C: float
+    Humidity: float
+    Rainfall_mm: float
+    Sunlight_Hours: float
+    Wind_Speed_kmh: float
+    Crop_Type: str
+    Crop_Growth_Stage: str
+    Season: str
+    Irrigation_Type: str
+    Water_Source: str
+    Field_Area_hectare: float
+    Mulching_Used: str
+    Previous_Irrigation_mm: float
+    Region: str
+
+@app.get("/")
+async def read_root():
+    return {"health_check": "OK", "model_version": "0.1dev"}
+
+@app.post("/predict")
+def predict(data: InputData):
+    df = pd.DataFrame([data.dict()])
+
+    pred_num = model.predict(df)
+    pred_label = le.inverse_transform(pred_num)[0]
+
+    return {
+        "prediction": pred_label
+    }
+```
+app.py라는 새로운 파일을 만듭니다.
+```PowerShell
+uvicorn app:app --reload
+```
+위의 명령어를 터미널에 입력후
+
+```https
+http://127.0.0.1:8000/docs.
+```
+위 링크로 들어가 모델이 제대로 배포되었는지 확인합니다.
+
+## 도커 
