@@ -244,3 +244,35 @@ http://127.0.0.1:8000/docs.
 ![image](https://github.com/cromi0256/core/blob/main/Operations/Project02dev/%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202026-04-18%20223519.png)
 label까지 제대로 출력이 되는군요
 ## 도커 
+```
+pip freeze > requirements.txt
+```
+다시 한번 가상환경에서 requirements.txt를 업데이트 합니다.
+
+[Docker](https://www.docker.com/)에서 다운받습니다.
+```Dockerfile
+FROM python:3.11-slim
+
+#set the working directory 
+WORKDIR /app
+
+#add app.py and models directory
+COPY app.py .
+COPY model.pkl .
+
+# add requirements file
+COPY requirements.txt .
+
+# install python libraries
+RUN pip install --no-cache-dir -r requirements.txt
+
+# specify default commands
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "80"]
+```
+파이썬 버전, 실행 위치, 모델과 배포파일, pip패키지를 설정합니다.
+
+```bash
+docker build -t <도커이미지 파일이름> <도커파일위치>
+```
+위의 명령어를 터미널에 실행하여 도커이미지를 만듭니다.
+
