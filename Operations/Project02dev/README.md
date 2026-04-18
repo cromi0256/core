@@ -276,3 +276,5 @@ docker build -t <도커이미지 파일이름> <도커파일위치>
 ```
 위의 명령어를 터미널에 실행하여 도커이미지를 만듭니다.
 
+![image](https://github.com/cromi0256/core/blob/main/Operations/Project02dev/%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202026-04-19%20032839.png)
+도커 프로그램에서도 확인할 수 있습니다.
