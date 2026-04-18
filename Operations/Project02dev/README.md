@@ -72,12 +72,15 @@ git commit -m "첫 커밋"
 ## 모델 훈련 & MLflow 연결
 ```Main.py
 import pandas as pd
+import numpy as np
 import logging
 import mlflow
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OrdinalEncoder, LabelEncoder
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import StratifiedKFold, cross_val_score
 from sklearn.ensemble import HistGradientBoostingClassifier
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, f1_score
 from pickle import dump
 
 # Set up logging
@@ -95,34 +98,55 @@ def main():
         logging.info("Data ingestion completed successfully")
 
         # Clean Data
-        cat_cols = ['Soil_Type', 'Crop_Type', 'Crop_Growth_Stage', 'Season', 'Irrigation_Type', 'Water_Source', 'Mulching_Used', 'Region']
-        X = train_df.drop(['id','Irrigation_Need'], axis=1)
-        Oe = OrdinalEncoder()
-        Le = LabelEncoder()
-        X[cat_cols] = Oe.fit_transform(X[cat_cols])
-        y = train_df['Irrigation_Need']
-        y = Le.fit_transform(y)
-        X_test = test_df.drop(['id'], axis=1)
-        X_test[cat_cols] = Oe.transform(X_test[cat_cols])
+        cat_cols = train_df.select_dtypes(include=['object']).columns.drop(['Irrigation_Need']).tolist()
+        num_cols = train_df.select_dtypes(include=['int64', 'float64']).columns.drop(['id']).tolist()
+        target_col = 'Irrigation_Need'
+        X = train_df.drop(['Irrigation_Need'], axis=1)
+        y = train_df[target_col]
+        le = LabelEncoder()
+        y_ = le.fit_transform(y)
+
+        # PipeLine
+        preprocessor = ColumnTransformer(
+            transformers=[
+                ('id', 'drop', ['id']),
+                ('num', 'passthrough', num_cols),
+                ('cat', OrdinalEncoder(
+                    handle_unknown='use_encoded_value',
+                    unknown_value=-1
+                ), cat_cols)
+            ]
+        )
         logging.info("Data cleaning completed successfully")
 
         # Model Train
-        X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
-        params = {
-        "random_state" : 42,
-        }
-        hgbc = HistGradientBoostingClassifier(**params)
-        hgbc.fit(X_train, y_train)
+        params = {"random_state" : 42}
+        pipeline = Pipeline([
+            ("preprocess", preprocessor),
+            ("model", HistGradientBoostingClassifier(**params))
+        ])
+        pipeline.fit(X, y_) # 전체 데이터 학습
 
         # Save Model
-        with open("filename.pkl", "wb") as f:
-            dump(hgbc, f, protocol=5)
+        with open("model.pkl", "wb") as f:
+            dump(pipeline, f, protocol=5)
         logging.info("Model training completed successfully")
 
         # Model Evaluate
-        y_pred = hgbc.predict(X_val)
-        report = classification_report(y_val, y_pred, output_dict=True)
-        print_report = classification_report(y_val, y_pred)
+        cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+        oof_preds = np.zeros(len(X))
+
+        for fold, (train_idx, valid_idx) in enumerate(cv.split(X, y_)):
+            X_train, X_valid = X.iloc[train_idx], X.iloc[valid_idx]
+            y_train, y_valid = y_[train_idx], y_[valid_idx]
+            
+            model = pipeline
+            model.fit(X_train, y_train)
+            
+            preds = model.predict(X_valid)
+            oof_preds[valid_idx] = preds
+        
+        # classification_report(y_, oof_preds)
         logging.info("Model evaluation completed successfully")
 
         # Tags 
@@ -130,8 +154,8 @@ def main():
         mlflow.set_tag('preprocessing', 'OrdinalEncoder')
 
         # Log Metrics
-        mlflow.log_metric('f1-score', report['weighted avg']['f1-score'])
-        mlflow.sklearn.log_model(hgbc, 'model')
+        mlflow.log_metric('f1-score', f1_score(y_, oof_preds, average='weighted'))
+        mlflow.sklearn.log_model(pipeline, 'model')
 
         # Register the model
         model_name = "HGB_model" 
@@ -141,10 +165,10 @@ def main():
         logging.info("MLflow tracking completed successfully")
 
         # Print evaluation results
-        print("n============= Model Evaluation Results ==============")
+        print("\n============= Model Evaluation Results ==============")
         print(f"Model: {model_name}")
-        print(f"n{print_report}")
-        print("=====================================================n")
+        print(f"\n{classification_report(y_, oof_preds)}")
+        print("=====================================================\n")
 
 if __name__ == "__main__":
     main()
