@@ -241,7 +241,7 @@ http://127.0.0.1:8000/docs.
 ```
 위 링크로 들어가 모델이 제대로 배포되었는지 확인합니다.
 
-![image](https://github.com/cromi0256/core/blob/main/Operations/Project02dev/%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202026-04-18%20223519.png)
+![image](https://github.com/cromi0256/core/blob/main/Operations/Project03dev/%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202026-04-18%20223519.png)
 label까지 제대로 출력이 되는군요
 ## 도커 
 ```
@@ -251,7 +251,7 @@ pip freeze > requirements.txt
 
 [Docker](https://www.docker.com/)에서 다운받습니다.
 ```Dockerfile
-FROM python:3.11-slim
+FROM python:3.13-slim
 
 #set the working directory 
 WORKDIR /app
@@ -276,5 +276,17 @@ docker build -t <도커이미지 파일이름> <도커파일위치>
 ```
 위의 명령어를 터미널에 실행하여 도커이미지를 만듭니다.
 
-![image](https://github.com/cromi0256/core/blob/main/Operations/Project02dev/%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202026-04-19%20032839.png)
+![image](https://github.com/cromi0256/core/blob/main/Operations/Project03dev/%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202026-04-19%20032839.png)
 도커 프로그램에서도 확인할 수 있습니다.
+
+```PowerShell
+docker tag <도커이미지> <dockerhub_username>/<docker-repo-name>
+```
+만든 도커이미지를 도커허브와 연결합니다.
+
+```PowerShell
+docker push <dockerhub_username>/<docker-repo-name>:latest
+```
+깃허브로 push하듯 도커허브로 push합니다.
+
+## 클라우드 컴퓨팅
