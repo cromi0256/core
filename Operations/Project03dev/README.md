@@ -291,8 +291,8 @@ docker push <dockerhub_username>/<docker-repo-name>:latest
 
 ## 클라우드 컴퓨팅
 [아마존ECS](https://ap-southeast-2.console.aws.amazon.com/ecs/v2/clusters?region=ap-southeast-2)
-위의 링크로 접속하여 계정을 로그인 합니다.
+위 링크로 접속하여 계정 로그인 합니다.
 
 Amazon Elastic Container Service 에 접속하여 Express Mode로 배포합니다.(10분 정도 소요)
-[image](https://github.com/cromi0256/core/blob/main/Operations/Project03dev/%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202026-04-20%20004314.png)
+![image](https://github.com/cromi0256/core/blob/main/Operations/Project03dev/%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202026-04-20%20004314.png)
 배포가 잘 되었다면 머신러닝 글로벌 배포가 완료된 겁니다.
