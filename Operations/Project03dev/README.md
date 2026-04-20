@@ -303,7 +303,7 @@ pip install evidently
 ```
 evidently AI 패키지를 설치합니다.
 
-```ipynb
+```py
 # 패키지 로드
 import pandas as pd
 from evidently import Dataset
@@ -313,7 +313,7 @@ from evidently.presets import DataDriftPreset, DataSummaryPreset
 
 # 데이터로드 & 스키마 지정
 reference = pd.read_csv('train.csv')
-production = pd. read_csv('test.csv')
+production = pd.read_csv('test.csv')
 
 cat_cols = reference.select_dtypes(include=['object']).columns.drop(['Irrigation_Need']).tolist()
 num_cols = reference.select_dtypes(include=['int64', 'float64']).columns.drop(['id']).tolist()
@@ -343,4 +343,5 @@ print(my_eval)    # 데이터 드리프트 확인
 ```
 monitor라는 파일을 .py나 .ipynb로 작성하여 결과를 확인합니다.
 
-![image]()
+![image](https://github.com/cromi0256/core/blob/main/Operations/Project03dev/%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202026-04-20%20221512.png)
+train.csv와 test.csv는 데이터가 크게 다르지 않아 보입니다.
