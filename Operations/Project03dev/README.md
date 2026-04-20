@@ -289,10 +289,58 @@ docker push <dockerhub_username>/<docker-repo-name>:latest
 ```
 깃허브로 push하듯 도커허브로 push합니다.
 
-## 클라우드 컴퓨팅
+## 클라우드 배포
 [아마존ECS](https://ap-southeast-2.console.aws.amazon.com/ecs/v2/clusters?region=ap-southeast-2)
 위 링크로 접속하여 계정 로그인 합니다.
 
 Amazon Elastic Container Service 에 접속하여 Express Mode로 배포합니다.(10분 정도 소요)
 ![image](https://github.com/cromi0256/core/blob/main/Operations/Project03dev/%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202026-04-20%20004314.png)
 배포가 잘 되었다면 머신러닝 글로벌 배포가 완료된 겁니다.
+
+## 모니터링
+```PowerShell
+pip install evidently
+```
+evidently AI 패키지를 설치합니다.
+
+```ipynb
+# 패키지 로드
+import pandas as pd
+from evidently import Dataset
+from evidently import DataDefinition
+from evidently import Report
+from evidently.presets import DataDriftPreset, DataSummaryPreset
+
+# 데이터로드 & 스키마 지정
+reference = pd.read_csv('train.csv')
+production = pd. read_csv('test.csv')
+
+cat_cols = reference.select_dtypes(include=['object']).columns.drop(['Irrigation_Need']).tolist()
+num_cols = reference.select_dtypes(include=['int64', 'float64']).columns.drop(['id']).tolist()
+
+schema = DataDefinition(
+    numerical_columns=num_cols,
+    categorical_columns=cat_cols,
+)
+
+# 데이터 평가
+eval_data_1 = Dataset.from_pandas(
+    pd.DataFrame(production),
+    data_definition=schema
+)
+
+eval_data_2 = Dataset.from_pandas(
+    pd.DataFrame(reference),
+    data_definition=schema
+)
+report = Report([
+    DataDriftPreset() 
+])
+
+my_eval = report.run(eval_data_1, eval_data_2)
+
+print(my_eval)    # 데이터 드리프트 확인
+```
+monitor라는 파일을 .py나 .ipynb로 작성하여 결과를 확인합니다.
+
+![image]()
