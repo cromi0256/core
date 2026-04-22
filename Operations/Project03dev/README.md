@@ -6,6 +6,9 @@
 
 자세한 정보는 위 링크에서 확인
 
+![image](https://docs.cloud.google.com/architecture/images/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning-2-manual-ml.svg)
+MLOps 0단계 흐름도
+
 ## 프로젝트 셋업
 playground-series-s6e4 에서 시작
 
