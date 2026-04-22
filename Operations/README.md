@@ -14,3 +14,4 @@
 
 ## External Link
 [Article](https://towardsdatascience.com/machine-learning-operations-mlops-for-beginners-a5686bfe02b2/?utm_source=roadmap&utm_medium=Referral&utm_campaign=TDS+roadmap+integration)
+[Google](https://services.google.com/fh/files/misc/practitioners_guide_to_mlops_whitepaper.pdf)
