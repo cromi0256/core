@@ -1,10 +1,7 @@
 아주 간단한 프로세스를 시작으로 자동화되고 고도화된 MLops 설계를 목표로 합니다.
 
-## Capailities
-- Experimentation : Git,
-
-## tools
-
+## Tools
+![image](https://mlops-for-all.github.io/assets/images/mlops-component-540cce1f22f97807b54c5e0dd1fec01e.png)
 - Experimentation : [Git, GitHub, VSCode], [MLflow, DVC], [matplotlib, seaborn, plotly, TensorBoard], [pandas, polars], [KubeFlow]
 - Data processing : [Apache Spark, Ray], [Apache kafka], [Scikit-learn, Hugging Face], [Apache Flink]
 - Model training : [[PyTorch, TensorFlow, JAX], [Scikit-learn, LightGBM, XGBoost, CatBoost], [Docker], [BentoML]], [DeepSpeed, PyTorch Distributed], [NVIDIA Triton Inference Server, Kubernetes (K8s) Device Plugins], [Optuna, Ray Tune], [AutoGluon, Neural Network Intelligence]
@@ -19,5 +16,6 @@
 ![image](https://towardsdatascience.com/wp-content/uploads/2024/08/1M2Cmy6S6P4ozs9Wylz1eFg.jpeg)
 
 ## External Link
+[Blog](https://mlops-for-all.github.io/docs/introduction/component/)
 [Article](https://towardsdatascience.com/machine-learning-operations-mlops-for-beginners-a5686bfe02b2/?utm_source=roadmap&utm_medium=Referral&utm_campaign=TDS+roadmap+integration)
 [Google](https://services.google.com/fh/files/misc/practitioners_guide_to_mlops_whitepaper.pdf)
