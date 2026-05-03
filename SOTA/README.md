@@ -38,6 +38,8 @@ scikit-learn 1.8.0 버전 기준
 18. tol(허용치)[1e-7] : 조기종료 한계점 - HPO 대상 아님
 19. verbose[0] : 프로세스 정보 출력도 - 모델의 로그 추적용
 20. random_state[None] : 재현성을 위해 특정 int값으로 설정(config파일로 설정)
+
 분류기A. class_weight[None] : 클래스 가중치 조정 - 불균형이 있다면 'balanced'로 조절
+
 회귀B. quantile[None] : loss가 'quantile'일 경우 활성화, 구간단위 예측에 사용
 
