@@ -32,7 +32,7 @@ model = HistGradientBoostingRegressor(random_state=42)
 model.fit(X, y)
 
 explainer = shap.TreeExplainer(model)  # Tree알고리즘에 최적화된 explainer
-shap_values = explainer(X1000)  # SHAP 값 생
+explaination = explainer(X1000)  # SHAP 값 생성
 ```
 
 ## SHAP Plots
