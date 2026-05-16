@@ -19,3 +19,20 @@ PDP는 특성과 타깃간의 관계를 다른 변수를 고정시킴으로써 �
 다중공선성에 매우 취약하며, 이 역시 특정 샘플에 대한 설명을 제공하지 못한다.
 
 두 방법 모두 모델의 설명보다는 점검에 가까우며, 사용자가 아닌 개발자를 위한 정보를 제공한다.
+
+```Python
+import sklearn
+import shap
+from sklearn.ensemble import HistGradientBoostingRegressor
+
+X, y = shap.datasets.california(n_points=10000)
+X1000 = shap.utils.sample(X, 1000)  # 전체 샘플중 1000개 샘플링(10%)
+
+model = HistGradientBoostingRegressor(random_state=42)
+model.fit(X, y)
+
+explainer = shap.TreeExplainer(model)  # Tree알고리즘에 최적화된 explainer
+shap_values = explainer(X1000)  # SHAP 값 생
+```
+
+## SHAP Plots
