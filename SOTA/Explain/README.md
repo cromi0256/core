@@ -31,8 +31,41 @@ X1000 = shap.utils.sample(X, 1000)  # 전체 샘플중 1000개 샘플링(10%)
 model = HistGradientBoostingRegressor(random_state=42)
 model.fit(X, y)
 
-explainer = shap.TreeExplainer(model)  # Tree알고리즘에 최적화된 explainer
+explainer = shap.Explainer(model)
 explaination = explainer(X1000)  # SHAP 값 생성
 ```
 
 ## SHAP Plots
+```Jupyter Notebook
+# 전역적 중요도
+shap.plots.beeswarm(explaination) 
+```
+<img width="744" height="436" alt="image" src="https://github.com/user-attachments/assets/5f3122e4-1590-4bb2-8084-7a735fb4ee21" />
+
+위의 표를 보면 가장 중요한 특성은 MedInc이며 값이 높을수록 타깃 또한 높아지는 경향이 있다
+
+SHAP값을 히스토그램과 비슷하게 출력하여 다각적인 분석을 할 수 있다
+
+```Jupyter Notebook
+# 전역적 중요도
+shap.plots.bar(explaination)
+```
+<img width="756" height="491" alt="image" src="https://github.com/user-attachments/assets/559de991-fb77-4159-a352-663e15d04adc" />
+
+막대 그래프는 평균적인 SHAP값으로 이 값이 낮다면 타깃과 연관이 낮다는 뜻이다
+
+```Jupyter Notebook
+# 국소적 설명
+shap.plots.bar(explaination[50])
+```
+<img width="846" height="491" alt="image" src="https://github.com/user-attachments/assets/5b45648d-cf14-43d4-bdfb-3715dcd81a6d" />
+
+특정 샘플에서 어떤 특성이 영향을 주었는지 알 수 있다
+
+```Jupyter Notebook
+# 코호트 분석
+shap.plots.bar(explaination.cohorts(2))
+```
+<img width="751" height="619" alt="image" src="https://github.com/user-attachments/assets/e41d480d-0d20-479a-9986-0ac3b1e47467" />
+
+N개의 집단으로 구분하여 각 집단의 특성 영향을 비교할수도 있
