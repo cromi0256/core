@@ -68,4 +68,19 @@ shap.plots.bar(explaination.cohorts(2))
 ```
 <img width="751" height="619" alt="image" src="https://github.com/user-attachments/assets/e41d480d-0d20-479a-9986-0ac3b1e47467" />
 
-N개의 집단으로 구분하여 각 집단의 특성 영향을 비교할수도 있
+N개의 집단으로 구분하여 각 집단의 특성 영향을 비교할수도 있다
+
+```Jupyter Notebook
+# scatter plot
+shap.plots.scatter(explaination[:, 'HouseAge'], dot_size=12, alpha=0.5, color=explaination)
+```
+<img width="667" height="453" alt="image" src="https://github.com/user-attachments/assets/18360c8e-ec12-4b03-a027-53bcb396c1fc" />
+
+또한 다른 변수와 상호작용 효과도 볼 수 있다
+
+Isolation Forest같은 비지도 학습에도 쓰일수 있어 이상치 탐지에도 적합하다
+
+## 추가적인 팁
+분류기의 경우 단순히 클래스만 출력하는 것이 아닌 proba를 출력하여 모델의 확신도를 점검할 수 있다(model.predict_proba(X))
+
+회귀 추정기는 퍼센타일을 설정하므로써 예측 범위구간을 살필수도 있다
