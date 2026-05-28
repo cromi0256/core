@@ -42,6 +42,84 @@ generator(
 ```
 트랜스포머와 허깅페이스 모델에 더 알고 싶다면 [공식 튜토리얼](https://huggingface.co/learn/llm-course/chapter1/6)을 참고한다.
 
+## 실제 작동방식
+위의 pipeline은 사실 아래와 같은 과정을 거친다.
+
+1. Tokenizer
+```JupyterNotebook
+from transformers import AutoTokenizer
+
+checkpoint = "distilbert-base-uncased-finetuned-sst-2-english"
+tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+
+raw_inputs = [
+    "I've been waiting for a HuggingFace course my whole life.",
+    "I hate this so much!",
+]
+inputs = tokenizer(raw_inputs, padding=True, truncation=True, return_tensors="pt")
+print(inputs)
+
+
+# 결과
+{
+    'input_ids': tensor([
+        [  101,  1045,  1005,  2310,  2042,  3403,  2005,  1037, 17662, 12172, 2607,  2026,  2878,  2166,  1012,   102],
+        [  101,  1045,  5223,  2023,  2061,  2172,   999,   102,     0,     0,     0,     0,     0,     0,     0,     0]
+    ]), 
+    'attention_mask': tensor([
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+    ])
+}
+```
+입력한 문장을 토큰화하여 컴퓨터가 이해할 수 있는 텐서로 변환한다
+
+2. 모델 선택
+```JupyterNotebook
+from transformers import AutoModel
+
+checkpoint = "distilbert-base-uncased-finetuned-sst-2-english"
+model = AutoModel.from_pretrained(checkpoint)
+```
+모델은 토큰화를 거친 텐서를 고차원 벡터로 변환한다
+
+torch.Size([2, 16, 768])의 텐서로 변환되며, (배치, 시퀀스길이, 은닉상태)로 출력된다
+
+![image](https://huggingface.co/datasets/huggingface-course/documentation-images/resolve/main/en/chapter2/transformer_and_head-dark.svg)
+
+그렇지만 특정 작업을 원한다면 알맞은 아키텍쳐를 선택한다
+
+```JupyterNotebook
+from transformers import AutoModelForSequenceClassification
+
+checkpoint = "distilbert-base-uncased-finetuned-sst-2-english"
+model = AutoModelForSequenceClassification.from_pretrained(checkpoint)
+outputs = model(**inputs)
+```
+
+이는 로짓 값을 출력하는 텐서(배치, 로짓)로 변환한다
+
+3. 후처리
+```JupyterNotebook
+import torch
+
+predictions = torch.nn.functional.softmax(outputs.logits, dim=-1)
+print(predictions)
+```
+로짓 값을 확률로 변환한다
+
+```
+# 로짓
+tensor([[-1.5607,  1.6123],
+        [ 4.1692, -3.3464]], grad_fn=<AddmmBackward>)
+
+# 확률
+tensor([[4.0195e-02, 9.5980e-01],
+        [9.9946e-01, 5.4418e-04]], grad_fn=<SoftmaxBackward>)
+```
+이후 label을 붙여 최종값을 출력한다(label, score)
+
+##
 
 
 ## 참고링크
