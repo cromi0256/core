@@ -119,8 +119,16 @@ tensor([[4.0195e-02, 9.5980e-01],
 ```
 이후 label을 붙여 최종값을 출력한다(label, score)
 
-##
+## 파인튜닝
+이 과정엔 파이토치 지식을 상당히 요구한다
 
+[허깅페이스](https://huggingface.co/learn/llm-course/chapter3/4) 강좌 참조
+
+전이학습과 비슷한 방법을 따르면서도 효율적인 학습과 GPU 최적화도 필요하다
+
+위 링크의 방법은 전체 아키텍쳐를 학습시키기에 상당히 오래걸린다
+
+대안적인 방법(PEFT)으로 LoRA, Prompt tuning 등이 있다
 
 ## 참고링크
 [허깅페이스](https://huggingface.co/learn/llm-course/chapter0/1)
