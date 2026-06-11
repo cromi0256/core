@@ -1,7 +1,31 @@
-## 모델 성능
+## 인사이트101
+ML&AI 엔지니어링과 관련된 핵심 지식을 정리중입니다
+
+## AutoML
+[AutoGluon](https://auto.gluon.ai/stable/index.html)
+
+앙상블과 스태킹, 그리고 파운데이션 모델을 사용한 빠른 프로토타입핑
+
+```
+from autogluon.tabular import TabularDataset, TabularPredictor
+
+data_root = 'https://autogluon.s3.amazonaws.com/datasets/Inc/'
+train_data = TabularDataset(data_root + 'train.csv')
+test_data = TabularDataset(data_root + 'test.csv')
+
+predictor = TabularPredictor(label='class').fit(train_data)
+predictions = predictor.predict(test_data)
+```
+
+단 3줄로 복잡한 코딩없이 빠른 모델 설계
+
+## 모델설계과정
+WIP
+
+## 모델 성능 향상
 [PriorLabs](https://docs.priorlabs.ai/improving-performance)
 
-정형 데이터 최고 성능의 Foundation Model인 TabPFN 2.6 문서에서 발췌
+정형 데이터 최고 성능의 Foundation Model인 TabPFN 3 문서에서 발췌
 
 **성능 향상 순서**
 
