@@ -6,6 +6,42 @@
 
 학습 방식에 변화를 주어 ResNet50의 정확도를 4.7% 상승한 방법을 알아보자.
 
+## 베이스라인
+
+```Python
+  batch_size=4
+
+  epochs=15
+  opt='sgd',  
+  momentum=0.9
+
+  lr=0.001
+  lr_scheduler='steplr'
+  lr_step_size=5
+  lr_gamma=0.1
+
+
+  # Regularization
+  weight_decay=1e-4
+
+
+  # Resizing
+  interpolation='bilinear'
+  val_resize_size=256
+  val_crop_size=224
+  train_crop_size=224
+
+  # v2.transform
+  train_transforms = v2.Compose([
+    v2.ToImage(),
+    v2.RandomResizedCrop(size=(224,224), interpolation=InterpolationMode.BILINEAR, antialias=True),
+    v2.RandomHorizontalFlip(0.5),
+    v2.ToDtype(torch.float, scale=True),
+    v2.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    v2.ToPureTensor()
+  ])
+```
+
 ## 학습률 최적화
 
 ```python
