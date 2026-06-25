@@ -1,4 +1,6 @@
-[참고자료](https://pytorch.org/blog/how-to-train-state-of-the-art-models-using-torchvision-latest-primitives/)
+[참고자료1](https://pytorch.org/blog/how-to-train-state-of-the-art-models-using-torchvision-latest-primitives/)
+
+[참고자료2](https://docs.pytorch.org/tutorials/beginner/transfer_learning_tutorial.html)
 
 ![Image](https://pytorch.org/wp-content/uploads/2024/11/Cumulative20Accuracy20Improvements20for20ResNet50.png)
 
@@ -7,6 +9,8 @@
 학습 방식에 변화를 주어 ResNet50의 정확도를 4.7% 상승한 방법을 알아보자.
 
 ## 베이스라인
+
+[코드 참조](https://github.com/pytorch/vision/blob/main/references/classification/train.py)
 
 ```Python
   batch_size=4
