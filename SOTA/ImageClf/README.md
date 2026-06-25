@@ -35,6 +35,8 @@
   val_crop_size=224
   train_crop_size=224
 
+
+# Code
   # v2.transform
   train_transforms = v2.Compose([
     v2.ToImage(),
@@ -54,6 +56,15 @@
   lr_warmup_epochs=5, 
   lr_warmup_method='linear', 
   lr_warmup_decay=0.01,
+
+
+# Code
+main_lr_scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
+            optimizer, T_max=args.epochs - args.lr_warmup_epochs, eta_min=0)
+warmup_lr_scheduler = torch.optim.lr_scheduler.LinearLR(
+                optimizer, start_factor=args.lr_warmup_decay, total_iters=args.lr_warmup_epochs)
+lr_scheduler = torch.optim.lr_scheduler.SequentialLR(
+            optimizer, schedulers=[warmup_lr_scheduler, main_lr_scheduler], milestones=[args.lr_warmup_epochs])
 ```
 웜업과 코사인어닐링을 결합한 동적인 학습률을 지정
 
@@ -61,6 +72,9 @@
 
 ```python
 auto_augment='ta_wide',
+
+# Code
+v2.TrivialAugmentWide(interpolation=interpolation)
 ```
 단순한 변형을 1번 적용
 
@@ -75,6 +89,9 @@ epochs=600,
 
 ```python
 random_erase=0.1,
+
+# Code
+v2.RandomErasing(p=0.1)
 ```
 이미지의 일부를 지워 드롭아웃같은 효과를 냄
 
@@ -82,6 +99,9 @@ random_erase=0.1,
 
 ```python
 label_smoothing=0.1,
+
+# Code
+nn.CrossEntropyLoss(label_smoothing=0.1)
 ```
 모델이 과도한 확신을 줄여 과적합 방지
 
@@ -90,6 +110,9 @@ label_smoothing=0.1,
 ```python
 mixup_alpha=0.2, 
 cutmix_alpha=1.0,
+
+# Code
+RandomChoice([v2.MixUp(0.2), v2.CutMix(1.0)])
 ```
 한 이미지에 다른 이미지를 일부 섞어 학습
 
