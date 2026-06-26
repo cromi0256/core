@@ -121,6 +121,24 @@ RandomChoice([v2.MixUp(0.2), v2.CutMix(1.0)])
 ```python
 weight_decay=2e-05, 
 norm_weight_decay=0.0,
+
+# Code
+def get_param_groups(model):
+    decay = []
+    no_decay = []
+
+    for name, param in model.named_parameters():
+        if not param.requires_grad:
+            continue
+        if param.ndim == 1:
+            no_decay.append(param)
+        else:
+            decay.append(param)
+
+    return [
+        {"params": decay, "weight_decay": weight_decay},
+        {"params": no_decay, "weight_decay": norm_weight_decay},
+    ]
 ```
 전역적 파라미터에 정규화 정도를 조정
 
@@ -129,6 +147,9 @@ norm_weight_decay=0.0,
 ```python
 val_crop_size=224, 
 train_crop_size=176,
+
+# Code
+v2.RandomResizedCrop(size=(176, 176), interpolation=InterpolationMode.BILINEAR, antialias=True)
 ```
 추론에는 더 높은 해상도로 평가하여 성능향상
 
@@ -138,6 +159,22 @@ train_crop_size=176,
 model_ema=True, 
 model_ema_steps=32, 
 model_ema_decay=0.99998,
+
+# Code
+class ModelEMA:
+    def __init__(self, model, decay=0.99998):
+        self.ema = deepcopy(model).eval()
+        self.decay = decay
+        for p in self.ema.parameters():
+            p.requires_grad_(False)
+
+    @torch.no_grad()
+    def update(self, model):
+        for ema_p, model_p in zip(self.ema.parameters(), model.parameters()):
+            ema_p.data.mul_(self.decay).add_(model_p.data, alpha=1 - self.decay)
+
+from copy import deepcopy
+ema = ModelEMA(model, decay=0.99998)
 ```
 지수이동평균으로 가중치를 조절하여 일반화와 안정화에 기여
 
@@ -145,6 +182,9 @@ model_ema_decay=0.99998,
 
 ```python
 val_resize_size=232,
+
+# Code
+v2.Resize(size=(232,232), interpolation=InterpolationMode.BILINEAR, antialias=True)
 ```
 훈련에는 256로 리사이즈 후 224로 크롭했다면, [224, 256] 범위의 크기로 리사이즈 하여 이미지 확대 왜곡 효과 절감
 
@@ -153,6 +193,9 @@ val_resize_size=232,
 ```python
 ra_sampler=True,
 ra_reps=4,
+
+# Code
+https://github.com/pytorch/vision/blob/main/references/classification/sampler.py 참조
 ```
 하나의 이미지를 여러번 샘플링하여 변형시킨 후 학습
 
