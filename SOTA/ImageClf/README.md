@@ -8,6 +8,9 @@
 
 학습 방식에 변화를 주어 ResNet50의 정확도를 4.7% 상승한 방법을 알아보자.
 
+Project00에는 이 베이스라인만으로도 [피스타치오 품종 분류](https://www.kaggle.com/datasets/muratkokludataset/pistachio-image-dataset/data)검증 정확도 99.77%를 달성했다.
+
+
 ## 베이스라인
 
 [코드 참조](https://github.com/pytorch/vision/blob/main/references/classification/train.py)
