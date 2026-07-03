@@ -36,3 +36,23 @@ ExecuTorch는 모바일, 엣지 디바이스에 파이토치 모델을 효율적
 
 # 코드 예시
 [Colab](https://colab.research.google.com/drive/1qpxrXC3YdJQzly3mRg-4ayYiOjC6rue3?usp=sharing#scrollTo=LElQ2xGUkKke)
+```python
+# 1. 모델 준비
+model.eval()   # 적용할 모델 평가모드 전환
+example_inputs = (torch.randn((1, 3, 224, 224))   # 내보내기 위한 필요작업
+
+# 2. export
+exported = torch.export.export(model, example_input)   # 그래프화
+
+# 3. edge 변환
+edge = to_edge(exported)   # 엣지 장치 최적화
+
+# 4. 최적화
+edge = edge.to_backend(XnnpackPartitioner())   # 특정 백엔드로 최적
+
+# 5. 저장
+manager = ExecutorchProgramManager(edge)   # 파일 저
+open("model.pte", "wb").write(manager.buffer)
+```
+
+> 이후 디바이스 환경에서 C++ 런타임으로 실행
