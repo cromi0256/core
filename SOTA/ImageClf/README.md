@@ -207,3 +207,5 @@ https://github.com/pytorch/vision/blob/main/references/classification/sampler.py
 소개한 방법으로는 단일 모델을 사용했지만 더 나은 백본 모델이나 앙상블로 더 향상시킬 수 있다
 
 [허깅페이스](https://huggingface.co/learn/cookbook/fine_tuning_vit_custom_dataset)의 ViT파인튜닝
+
+[ViT LoRa파인튜닝](https://colab.research.google.com/github/fariddinar/computer-vision-course/blob/main/notebooks/Unit%203%20-%20Vision%20Transformers/LoRA-Image-Classification.ipynb#scrollTo=d98c523b)
