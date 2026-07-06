@@ -81,7 +81,9 @@
 
     
 # 모델-데이터 분석
-   - 구성 : 피쳐중요도, 결과해석, 분산-편향 검토
+   - 구성 : 피쳐중요도, 결과해석, AI윤리(편향, 성능) 검토
    1. Permutation Feature Importance
-      
-   3. SHAP
+      ```python
+      from sklearn.inspection import permutation_importance
+      ```
+   2. SHAP
