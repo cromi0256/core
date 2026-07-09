@@ -1,4 +1,5 @@
-[참고 자료](https://www.promptingguide.ai/)
+[참고 자료1](https://www.promptingguide.ai/)
+[참고 자료2](https://www.langchain.com/blog/context-engineering-for-agents)
 ![Image](https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2Ffaa261102e46c7f090a2402a49000ffae18c5dd6-2292x1290.png&w=3840&q=75)
 
 # 프롬프트 엔지니어링
@@ -22,4 +23,9 @@
 
 # 컨텍스트 엔지니어링
 1. 외부 메모리 : 데이터베이스, 지식 그래프 또는 기타 외부 소스에서 관련 데이터를 검색하여 모델의 지식을 보강
-2. 
+2. RAG : 내부 파라미터에 없는 정보를 외부 데이터에서 가져와 관련성높고 최신의 정보를 모델에 제공
+3. 동적 필터링 : RAG를 보충하는 기술로, 검색된 정보를 선택적으로 필터링하여 답변의 품질을 향상
+4. 컨텍스트 압축 : 요약, 필터링, 재구조화를 통해 중복되거나 관련없는 불필요한 정보를 제거하여 효율성과 효과성 향상
+5. Context Isolation : 서로 다른 작업이나 지식을 분리하여 안전성과 정확성을 높임
+
+
