@@ -16,3 +16,11 @@
 - 장점 : 최고 수준의 모델, 인프라 관리가 필요없음, 빠른 업데이트
 - 단점 : 토큰 정책 비용에 예민함, 인터넷 연결이 필요하며 데이터가 전송됨으로써 유출 위험도 존재
 
+또한 Task에 따라 모델의 성능 또한 제각각 다르므로 리더보드를 확인해 보는것도 좋다
+
+[허깅페이스](https://huggingface.co/models)
+
+[리더보드 링크](https://arena.ai/leaderboard)
+
+# 코드 예시
+[허깅페이스](https://huggingface.co/learn/llm-course/en/chapter2/8)
