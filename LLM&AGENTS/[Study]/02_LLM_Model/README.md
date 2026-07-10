@@ -23,4 +23,28 @@
 [리더보드 링크](https://arena.ai/leaderboard)
 
 # 코드 예시
-[허깅페이스](https://huggingface.co/learn/llm-course/en/chapter2/8)
+[코드출처](https://bentoml.com/llm/model-interaction/openai-compatible-api)
+
+대부분의 모델은 코드 작성 방식이 비슷하다
+
+OpenAI와 호환되는 API로 다른 모델에서도 작동한다
+
+```python
+from openai import OpenAI
+
+# Use your custom endpoint URL and API key
+client = OpenAI(
+    base_url="https://your-custom-endpoint.com/v1",
+    api_key="your-api-key"
+)
+
+response = client.chat.completions.create(
+    model="your-model-name",
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "How can I integrate OpenAI-compatible APIs?"}
+    ]
+)
+
+print(response.choices[0].message)
+```
