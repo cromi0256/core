@@ -13,17 +13,17 @@
 * 공식문서[https://docs.python.org/ko/3/tutorial/index.html]
 * 추천로드맵[https://roadmap.sh/python]
 2. SQL - 데이터 파이프라인
-* PostgreSQL공식문서[https://www.postgresql.org/docs/current/]
+* PostgreSQL 공식문서[https://www.postgresql.org/docs/current/]
 * 추천로드맵[https://roadmap.sh/sql]
 3. Shell/Bash - 운영체제와 터미널
-* Bash공식문서[https://www.gnu.org/software/bash/manual/bash.html]
+* Bash 공식문서[https://www.gnu.org/software/bash/manual/bash.html]
 * 추천로드맵[https://roadmap.sh/shell-bash]
 
 ## 2. 버전 컨트롤
 파일의 변화를 기록하고 추적한다.
 1. Git & GitHub
-* Git공식문서[https://git-scm.com/book/ko/v2]
-* GitHub공식문서[https://docs.github.com/ko]
+* Git 공식문서[https://git-scm.com/book/ko/v2]
+* GitHub 공식문서[https://docs.github.com/ko]
 * 추천로드맵[https://roadmap.sh/git-github]
 
 ## 3. CI/CD
@@ -31,3 +31,28 @@
 1. GitHub Actions
 * 공식문서[https://docs.github.com/ko/actions]
 * 
+
+## 4. 머신러닝 기초
+데이터 전처리, 특성 선택, 모델 선택, 모델 학습, 평가 지표, 과적합 방지가 필요하다.
+1. 수학과 통계
+* 미적분학, 통계학, 선형대수학 학부수준의 지식
+* 추천도서
+2. 머신러닝
+* 사이킷런 공식문서[https://scikit-learn.org/stable/user_guide.html]
+* 추천 로드맵[https://roadmap.sh/machine-learning]
+3. 딥러닝
+* 파이토치 공식문서[https://docs.pytorch.org/docs/2.13/index.html]
+* 추천 로드맵(위와 동일)[https://roadmap.sh/machine-learning]
+4. 모델 평가
+* MLFlow 공식문서[https://mlflow.org/docs/latest/ml/]
+
+## 5. 클라우드 컴퓨팅
+AWS, Azure, GCP 등 인프라(서버, 스토리지, 네트워킹, SDK, 소프트웨어)를 빌려 운영을 담당한다.
+또한, 독자적인 ML서비스(AWS-SageMaker, GCP-Gemini Enterprise Agent Platform(구)Vertex AI, Azure ML)도 제공한다.
+* 이 아래부터 백엔드 지식도 필요해진다.
+* GCP 공식문서[https://docs.cloud.google.com/docs?hl=ko]
+* Vertex AI 공식문서[https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=ko]
+
+## 6. 컨테이너화
+1. Docker
+2. Kubernetes(k9s)
