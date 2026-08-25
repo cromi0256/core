@@ -6,7 +6,7 @@
 언제든 최신의 정보를 AI로 쉽고 빠르게 배울 수 있는 세상이다.
 
 # MLOps 기술 스택
-
+![Image](https://docs.cloud.google.com/static/architecture/images/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning-1-elements-of-ml.png?hl=ko)
 ## 1. 프로그래밍 기초
 전체적인 기술을 다루면서도 다른 기술을 배우기 위한 기초가 된다.
 1. 파이썬 - 코드 설계
@@ -15,6 +15,7 @@
 2. SQL - 데이터 파이프라인
 * [PostgreSQL 공식문서](https://www.postgresql.org/docs/current/)
 * [추천로드맵](https://roadmap.sh/sql)
+* [추천실습(유료)](https://roadmap.sh/courses/sql)
 3. Shell/Bash - 운영체제와 터미널
 * [Bash 공식문서](https://www.gnu.org/software/bash/manual/bash.html)
 * [추천로드맵](https://roadmap.sh/shell-bash)
@@ -40,6 +41,7 @@
 2. 머신러닝
 * [사이킷런 공식문서](https://scikit-learn.org/stable/user_guide.html)
 * [추천로드맵](https://roadmap.sh/machine-learning)
+* [추천실습](https://www.kaggle.com/learn)
 3. 딥러닝
 * [파이토치 공식문서](https://docs.pytorch.org/docs/stable/index.html)
 * [추천로드맵(위와 동일)](https://roadmap.sh/machine-learning)
@@ -52,6 +54,7 @@ AWS, Azure, GCP 등 인프라(서버, 스토리지, 네트워킹, SDK, 소프트
 * 이 아래부터 백엔드 지식도 필요해진다.
 * [GCP 공식문서](https://docs.cloud.google.com/docs?hl=ko)
 * [Vertex AI 공식문서](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=ko)
+* [추천실습](https://www.skills.google/paths/8)
 
 ## 6. 컨테이너화
 앱의 코드와 실행에 필요한 모든 파일, 라이브러리, 환경 설정을 하나로 묶어 '컨테이너'라는 독립된 단위로 만든다. 개발환경과 같은 설정의 배포로 안정성을 향상한다.
@@ -62,4 +65,4 @@ AWS, Azure, GCP 등 인프라(서버, 스토리지, 네트워킹, SDK, 소프트
 * [공식문서](https://kubernetes.io/docs/home/)
 * [추천로드맵](https://roadmap.sh/kubernetes)
 
-## 7. 데이터 엔지니어링 기
+## 7. 데이터 엔지니어링 기초
