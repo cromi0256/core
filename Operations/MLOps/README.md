@@ -66,3 +66,8 @@ AWS, Azure, GCP 등 인프라(서버, 스토리지, 네트워킹, SDK, 소프트
 * [추천로드맵](https://roadmap.sh/kubernetes)
 
 ## 7. 데이터 엔지니어링 기초
+데이터 엔지니어링은 본질적으로 데이터의 수집, 검증, 저장, 변환 및 처리를 다루는 분야다.
+1. Polars
+* [공식문서](https://docs.pola.rs)
+* [클라우드 공식문서](https://docs.cloud.pola.rs/polars-cloud/)
+* 
