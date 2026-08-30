@@ -33,10 +33,15 @@ python -V
 파이썬 버전 확인
 
 ```PowerShell
-uv add scikit-learn polars 
+uv add scikit-learn polars plotly 
 ```
 최신버전의 scikit-learn 설치
 
 이 과정은 pip로 설치했을때보다 확실히 빠르다
 
-# 2. 
+
++ VSCode환경에서 시작
+```PowerShell
+uv add --dev ipykernel
+```
+# 2. 데이터셋 불러오기
