@@ -6,7 +6,8 @@
 5. Plotly : 동적 시각화 도구
 
 # 0. 개발 코드
-실제 작성 코드
+[실제 작성 코드](https://github.com/cromi0256/core/blob/main/SOTA/Project05/src/project05/iso_dev00.ipynb)
+
 \src\project05\iso_dev00.ipynb참조
 
 # 1. uv&패키지 설치
