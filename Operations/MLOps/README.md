@@ -12,6 +12,7 @@
 1. 파이썬 - 코드 설계
 * [공식문서](https://docs.python.org/ko/3/tutorial/index.html)
 * [추천로드맵](https://roadmap.sh/python)
+* [추천문서](https://thinkinginpython.com)
 2. SQL - 데이터 파이프라인
 * [PostgreSQL 공식문서](https://www.postgresql.org/docs/current/)
 * [추천로드맵](https://roadmap.sh/sql)
@@ -71,3 +72,15 @@ AWS, Azure, GCP 등 인프라(서버, 스토리지, 네트워킹, SDK, 소프트
 * [공식문서](https://docs.pola.rs)
 * [클라우드 공식문서](https://docs.cloud.pola.rs/polars-cloud/)
 * 
+
+## 8. Infrastructure as Code(IaC)
+인프라를 클라우드 콘솔에 접속하여 설정하는 기존의 방법 대신 정의한 코드로 인프라를 설계하는 방식이다.
+1. Terraform
+* [공식문서](https://developer.hashicorp.com/terraform)
+* [추천로드맵](https://roadmap.sh/terraform)
+* [추천실습](https://www.skills.google/course_templates/636)
+
+2. Ansible
+* [공식문서](https://docs.ansible.com/projects/ansible/latest/index.html#)
+
+## 9. Orchestration & Deployment
