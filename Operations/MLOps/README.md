@@ -62,7 +62,7 @@ AWS, Azure, GCP 등 인프라(서버, 스토리지, 네트워킹, SDK, 소프트
 1. Docker
 * [공식문서](https://docs.docker.com/)
 * [추천로드맵](https://roadmap.sh/docker)
-2. Kubernetes(k9s)
+2. Kubernetes(k8s)
 * [공식문서](https://kubernetes.io/docs/home/)
 * [추천로드맵](https://roadmap.sh/kubernetes)
 
@@ -84,3 +84,5 @@ AWS, Azure, GCP 등 인프라(서버, 스토리지, 네트워킹, SDK, 소프트
 * [공식문서](https://docs.ansible.com/projects/ansible/latest/index.html#)
 
 ## 9. Orchestration & Deployment
+1. Apache Airflow
+* [공식문서](https://airflow.apache.org/docs/)
