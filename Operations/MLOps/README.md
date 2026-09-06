@@ -27,6 +27,7 @@
 * [Git 공식문서](https://git-scm.com/book/ko/v2)
 * [GitHub 공식문서](https://docs.github.com/ko)
 * [추천로드맵](https://roadmap.sh/git-github)
+* [추천실습](https://learngitbranching.js.org/?locale=ko)
 
 ## 3. CI/CD
 지속적 통합 및 지속적 배포로 빌드, 테스트, 릴리즈를 간소화하고 자동화한다.
@@ -52,7 +53,7 @@
 ## 5. 클라우드 컴퓨팅
 AWS, Azure, GCP 등 인프라(서버, 스토리지, 네트워킹, SDK, 소프트웨어)를 빌려 운영을 담당한다.
 또한, 독자적인 ML서비스(AWS-SageMaker, GCP-Gemini Enterprise Agent Platform(구)Vertex AI, Azure ML)도 제공한다.
-* 이 아래부터 백엔드 지식도 필요해진다.
+* 이 아래부터 [백엔드 지식](https://roadmap.sh/backend?r=backend-beginner)도 필요해진다.
 * [GCP 공식문서](https://docs.cloud.google.com/docs?hl=ko)
 * [Vertex AI 공식문서](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=ko)
 * [추천실습](https://www.skills.google/paths/8)
@@ -71,7 +72,12 @@ AWS, Azure, GCP 등 인프라(서버, 스토리지, 네트워킹, SDK, 소프트
 1. Polars
 * [공식문서](https://docs.pola.rs)
 * [클라우드 공식문서](https://docs.cloud.pola.rs/polars-cloud/)
-* 
+
+2. Apache Spark(> 100 GB)
+* [공식문서](https://spark.apache.org/docs/latest/)
+
+3. Hadoop Distributed File System(HDFS)(클러스터 컴퓨팅)
+* [공식문서](https://hadoop.apache.org/docs/r1.2.1/hdfs_design.html)
 
 ## 8. Infrastructure as Code(IaC)
 인프라를 클라우드 콘솔에 접속하여 설정하는 기존의 방법 대신 정의한 코드로 인프라를 설계하는 방식이다.
@@ -83,6 +89,10 @@ AWS, Azure, GCP 등 인프라(서버, 스토리지, 네트워킹, SDK, 소프트
 2. Ansible
 * [공식문서](https://docs.ansible.com/projects/ansible/latest/index.html#)
 
-## 9. Orchestration & Deployment
+## 9. Orchestration
+오케스트레이션은 여러 IT 자동화 작업 또는 프로세스를 조정하여 실행하는 것을 의미한다.(배포 및 구성관리)
 1. Apache Airflow
 * [공식문서](https://airflow.apache.org/docs/)
+
+2. KubeFlow
+* [공식문서](https://www.kubeflow.org/docs/)
