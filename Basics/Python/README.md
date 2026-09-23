@@ -1,9 +1,11 @@
 1. 기초 지식
+
 [공식문서](https://docs.python.org/ko/3.14/)
 
 [RealPython](https://realpython.com)
 
 2. [유용한 내장 라이브러리](https://docs.python.org/ko/3.14/tutorial/stdlib.html)
+
 `re` : 정규표현식 조작
 
 `datetime` : 시간 데이터 처리
@@ -30,6 +32,20 @@
 
 `sys` : 시스템 접근
 
-3. 가상환경 설정
+<details>
+<summary>[3. 유틸리티]
+</summary>
 
-`uv`
+환경변수 관리 :
+<img src="https://img.shields.io/badge/dotenv-hex?style=flat&logo=dotenv&logoColor=ffffff&color=%#23ECD53F">
+
+패키지 관리 :
+<img src="https://img.shields.io/badge/uv-hex?style=flat&logo=uv&logoColor=ffffff&color=%23DE5FE9">
+
+코드 검증 : 
+<img src="https://img.shields.io/badge/ruff-hex?style=flat&logo=ruff&logoColor=ffffff&color=%23D7FF64">
+
+정적 타이핑 :
+<img src="https://img.shields.io/badge/ruff-hex?style=flat&logo=ruff&logoColor=ffffff&color=%23E92063">
+
+</details>
