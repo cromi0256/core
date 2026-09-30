@@ -179,11 +179,78 @@ for m in messages["messages"]:
     m.pretty_print()
 ```
 
-3. 리듀서
+3. 상태
 
+리듀서 : 상태를 기록하는 로직
 ```python
+from typing import Annotated
+from typing_extensions import TypedDict
+from operator import add
 
+# 1. 기본 제공 리듀서 사용 (예: operator.add를 사용하여 리스트 누적)
+class State(TypedDict):
+    foo: Annotated[list[int], add]
+
+# 2. 커스텀 리듀서 정의 (예: None 처리 로직 포함)
+def reduce_list(left: list | None, right: list | None) -> list:
+    if not left: left = []
+    if not right: right = []
+    return left + right
+
+class CustomState(TypedDict):
+    foo: Annotated[list[int], reduce_list]
 ```
+
+메시지 : 에이전트 대화 기록물 > 이전 대화를 수정하거나 변경할때
+```python
+from langchain_core.messages import RemoveMessage
+
+# Message list
+messages = [AIMessage("Hi.", name="Bot", id="1")]
+messages.append(HumanMessage("Hi.", name="Lance", id="2"))
+messages.append(AIMessage("So you said you were researching ocean mammals?", name="Bot", id="3"))
+messages.append(HumanMessage("Yes, I know about whales. But what others should I learn about?", name="Lance", id="4"))
+
+# Isolate messages to delete
+delete_messages = [RemoveMessage(id=m.id) for m in messages[:-2]]
+print(delete_messages)
+
+add_messages(messages , delete_messages)
+```
+
+멀티 스키마 : 노드 간 내부 통신용 스키마와 외부 입출력용 스키마를 분리하여 제어할때
+```python
+# 내부 통신용
+class OverallState(TypedDict):
+    foo: int
+
+class PrivateState(TypedDict):
+    baz: int  # 내부 노드끼리만 공유하는 중간 키
+
+def node_1(state: OverallState) -> PrivateState:
+    return {"baz": state['foo'] + 1}
+
+def node_2(state: PrivateState) -> OverallState:
+    return {"foo": state['baz'] + 1}
+
+# 외부 입출력용
+class InputState(TypedDict):
+    question: str
+
+class OutputState(TypedDict):
+    answer: str
+
+class OverallState(TypedDict):
+    question: str
+    answer: str
+    notes: str
+
+graph = StateGraph(OverallState, input_schema=InputState, output_schema=OutputState)
+```
+
+4. 메모리
+
+압축 : 
 
 # 참고 링크
 
