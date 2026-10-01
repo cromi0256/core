@@ -2,6 +2,8 @@
 
 최신 버전과 차이가 있으며 아래 작성된 코드는 변경 되었을 수 있습니다.
 
+![Image](https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/agent_workflow.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=c217c9ef517ee556cae3fc928a21dc55)
+
 # 랭그래프
 
 1. 그래프
@@ -250,7 +252,122 @@ graph = StateGraph(OverallState, input_schema=InputState, output_schema=OutputSt
 
 4. 메모리
 
-압축 : 
+메모리 압축 : 긴 컨텍스트로 인한 추론 저하로 메시지를 줄여 메모리 확보
+```python
+# 메시지 삭제
+from langchain_core.messages import RemoveMessage
+from langgraph.graph import MessagesState, StateGraph, START, END
+
+# 최근 2개의 메시지만 남기고 나머지 삭제
+def filter_messages(state: MessagesState):
+    delete_messages = [RemoveMessage(id=m.id) for m in state["messages"][:-2]]
+    return {"messages": delete_messages}
+
+def chat_model_node(state: MessagesState):
+    return {"messages": [llm.invoke(state["messages"])]}
+
+
+# 메시지 필터링
+def chat_model_node(state: MessagesState):
+    # 그래프 상태는 유지하고, 모델 호출 시에만 최근 1개의 메시지만 전달
+    return {"messages": [llm.invoke(state["messages"][-1:])]}
+
+
+# 메시지 트림
+from langchain_core.messages import trim_messages
+from langchain_openai import ChatOpenAI
+
+def chat_model_node(state: MessagesState):
+    # 토큰 수 100개를 초과하지 않도록 최근 메시지 위주로 자름
+    messages = trim_messages(
+        state["messages"],
+        max_tokens=100,
+        strategy="last",
+        token_counter=ChatOpenAI(model="gpt-4o"),
+        allow_partial=False,
+    )
+    return {"messages": [llm.invoke(messages)]}
+```
+
+외부 메모리 : db연결을 통한 메모리 영구저장
+```python
+import sqlite3
+from langgraph.checkpoint.sqlite import SqliteSaver
+
+# 로컬 DB 파일 연결
+db_path = "state_db/example.db"
+conn = sqlite3.connect(db_path, check_same_thread=False)
+
+# Checkpointer 인스턴스 생성
+memory = SqliteSaver(conn)
+
+from typing_extensions import Literal
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import SystemMessage, HumanMessage, RemoveMessage
+from langgraph.graph import MessagesState, END
+
+model = ChatOpenAI(model="gpt-4o", temperature=0)
+
+# State 확장 (요약 정보 필드 추가)
+class State(MessagesState):
+    summary: str
+
+# LLM 호출 노드 (기존 요약이 존재하면 시스템 메시지로 첨부)
+def call_model(state: State):
+    summary = state.get("summary", "")
+    if summary:
+        system_message = f"Summary of conversation earlier: {summary}"
+        messages = [SystemMessage(content=system_message)] + state["messages"]
+    else:
+        messages = state["messages"]
+    
+    response = model.invoke(messages)
+    return {"messages": response}
+
+# 요약 생성 및 메시지 정리 노드
+def summarize_conversation(state: State):
+    summary = state.get("summary", "")
+    if summary:
+        summary_message = (
+            f"This is summary of the conversation to date: {summary}\n\n"
+            "Extend the summary by taking into account the new messages above:"
+        )
+    else:
+        summary_message = "Create a summary of the conversation above:"
+
+    messages = state["messages"] + [HumanMessage(content=summary_message)]
+    response = model.invoke(messages)
+
+    # 최근 2개 메시지만 남기고 이전 메시지 삭제
+    delete_messages = [RemoveMessage(id=m.id) for m in state["messages"][:-2]]
+    return {"summary": response.content, "messages": delete_messages}
+
+# 조건부 분기 (메시지가 6개 초과 시 요약 실행)
+def should_continue(state: State) -> Literal["summarize_conversation", END]:
+    if len(state["messages"]) > 6:
+        return "summarize_conversation"
+    return END
+
+from langgraph.graph import StateGraph, START
+
+workflow = StateGraph(State)
+workflow.add_node("conversation", call_model)
+workflow.add_node(summarize_conversation)
+
+workflow.add_edge(START, "conversation")
+workflow.add_conditional_edges("conversation", should_continue)
+workflow.add_edge("summarize_conversation", END)
+
+# SQLite Checkpointer를 이용해 컴파일
+graph = workflow.compile(checkpointer=memory)   # 여기에 메모리 삽입
+
+# thread_id를 지정하여 대화 실행 (DB에 실시간 상태 기록)
+config = {"configurable": {"thread_id": "1"}}
+input_message = HumanMessage(content="hi! I'm Lance")
+output = graph.invoke({"messages": [input_message]}, config)
+```
+
+5. 
 
 # 참고 링크
 
