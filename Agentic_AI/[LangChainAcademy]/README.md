@@ -11,3 +11,5 @@
 [로드맵](https://roadmap.sh/ai-agents)
 
 [랭체인 공식문서](https://docs.langchain.com/) 
+
+[랭체인 블로그](https://www.langchain.com/blog/the-agent-development-lifecycle)
