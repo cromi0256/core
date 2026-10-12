@@ -4,6 +4,7 @@
 
 <img width="1222" height="822" alt="image" src="https://github.com/user-attachments/assets/f45c144d-1bf1-4471-b1f0-9e4abf4a5b5b" />
 
+[비교](https://www.langchain.com/blog/deep-agents-vs-langchain-vs-langgraph)
 
 1. 랭체인 : 간단한 에이전트 프레임워크
 2. 랭그래프 : 낮은 단계의 오케스트레이션 제작
@@ -16,3 +17,4 @@
 [랭체인 공식문서](https://docs.langchain.com/) 
 
 [랭체인 블로그](https://www.langchain.com/blog/the-agent-development-lifecycle)
+
