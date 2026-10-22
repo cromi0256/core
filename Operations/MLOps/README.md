@@ -96,3 +96,11 @@ AWS, Azure, GCP 등 인프라(서버, 스토리지, 네트워킹, SDK, 소프트
 
 2. KubeFlow
 * [공식문서](https://www.kubeflow.org/docs/)
+
+## 10. Monitoring & Observability
+메트릭, 로그, 트레이스를 수집하여 모델이 프로덕션 환경에서 어떻게 동작하는지 파악하고, 성능 저하나 데이터 드리프트와 같은 잠재적 문제를 식별하며, 전체 시스템의 운영에 대한 통찰력을 얻는 작업이 포함된다.
+1. Prometheus
+* [공식문서](https://prometheus.io/docs/introduction/overview/)
+
+2. Grafana
+* [공식문서](https://grafana.com/docs/)

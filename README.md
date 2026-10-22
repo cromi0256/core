@@ -42,7 +42,7 @@
 * Terraform, Ansible - IaC: 인프라를 구성파일을 사용하여 운영
 * Airflow, KubeFlow - 모델 개발, 테스팅, 배포 워크플로우 관리
 * Prometheus, Grafana - 모델과 인프라의 성능과 상태 추적
-* ExecuTorch - 엣지AI 배포
+* ExecuTorch, Jetson - 엣지AI 배포
 
 
 업무:
