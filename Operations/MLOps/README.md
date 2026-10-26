@@ -54,6 +54,7 @@
 AWS, Azure, GCP 등 인프라(서버, 스토리지, 네트워킹, SDK, 소프트웨어)를 빌려 운영을 담당한다.
 또한, 독자적인 ML서비스(AWS-SageMaker, GCP-Gemini Enterprise Agent Platform(구)Vertex AI, Azure ML)도 제공한다.
 * 이 아래부터 [백엔드 지식](https://roadmap.sh/backend?r=backend-beginner)도 필요해진다.
+* [추천로드맵](https://roadmap.sh/cloud-computing)
 * [GCP 공식문서](https://docs.cloud.google.com/docs?hl=ko)
 * [Vertex AI 공식문서](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=ko)
 * [추천실습](https://www.skills.google/paths/8)
@@ -74,10 +75,15 @@ AWS, Azure, GCP 등 인프라(서버, 스토리지, 네트워킹, SDK, 소프트
 * [클라우드 공식문서](https://docs.cloud.pola.rs/polars-cloud/)
 
 2. Apache Spark(> 100 GB)
+* 배치, 대규모 처리
 * [공식문서](https://spark.apache.org/docs/latest/)
 
-3. Hadoop Distributed File System(HDFS)(클러스터 컴퓨팅)
-* [공식문서](https://hadoop.apache.org/docs/r1.2.1/hdfs_design.html)
+3. Apache Flink
+* 실시간 스트리밍
+
+4. Apache Kafka
+* 분산 메시지 큐
+
 
 ## 8. Infrastructure as Code(IaC)
 인프라를 클라우드 콘솔에 접속하여 설정하는 기존의 방법 대신 정의한 코드로 인프라를 설계하는 방식이다.
