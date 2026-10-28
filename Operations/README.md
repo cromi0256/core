@@ -13,7 +13,7 @@
 - Model registry : [MLflow]
 
 ## Overview
-![image](https://towardsdatascience.com/wp-content/uploads/2024/08/1M2Cmy6S6P4ozs9Wylz1eFg.jpeg)
+![image](https://assets.insightmediagroup.io/media/wp-content/uploads/2024/08/1M2Cmy6S6P4ozs9Wylz1eFg.jpeg)
 
 ## Local Test
 소규모 프로젝트 프로세스
