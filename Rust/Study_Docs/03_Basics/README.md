@@ -73,3 +73,129 @@ fn main() {
 ```
 
 # 3.3. 함수
+파이썬과 달리 함수 위치에 제약 받지 않는다
+
+```rust
+fn main() {
+    print_labeled_measurement(5, 'h');
+}
+
+fn print_labeled_measurement(value: i32, unit_label: char) {
+    println!("The measurement is: {value}{unit_label}");
+}
+```
+매개변수는 타입을 반드시 명시해야 한다
+
+```rust
+fn main() {
+    let y = {
+        let x = 3;
+        x + 1   // 여기에 세미콜론이 없다; 즉 x+1을 반환
+    };
+
+    println!("The value of y is: {y}");
+}
+```
+표현식은 계산을 통해 '값(Value)'을 만들어내는 코드(; 없음)
+
+구문은 어떤 행동을 수행하지만, '값(Value)'을 반환하지 않는 코드(; 있음)
+
+```rust
+fn main() {
+    let x = plus_one(5);
+
+    println!("The value of x is: {x}");
+}
+
+fn plus_one(x: i32) -> i32 {    // 반환 값을 -> (타입) 으로 지정
+    x + 1
+}
+```
+
+# 3.4. 주석
+//를 사용하여 주석처리(컴파일 시 무시됨)
+
+# 3.5. 제어 흐름문
+```rust
+fn main() {
+    let number = 6;
+
+    if number % 4 == 0 {    // 조건식은 반드시 bool타입일 것
+        println!("number is divisible by 4");
+    } else if number % 3 == 0 {
+        println!("number is divisible by 3");
+    } else if number % 2 == 0 {
+        println!("number is divisible by 2");
+    } else {
+        println!("number is not divisible by 4, 3, or 2");
+    }
+}
+```
+if와 else 갈래 값의 타입이 호환되지 않음(if > int32, else > char같이 혼용 안 됨)
+
+```rust
+fn main() {
+    let mut counter = 0;
+
+    let result = loop {
+        counter += 1;
+
+        if counter == 10 {
+            break counter * 2;  // break으로 무한루프를 탈출, 그리고 값을 반환
+        }
+    };
+
+    println!("The result is {result}");
+}
+```
+
+```rust
+fn main() {
+    let mut count = 0;
+    'counting_up: loop {
+        println!("count = {count}");
+        let mut remaining = 10;
+
+        loop {
+            println!("remaining = {remaining}");
+            if remaining == 9 {
+                break;
+            }
+            if count == 2 {
+                break 'counting_up;
+            }
+            remaining -= 1;
+        }
+
+        count += 1;
+    }
+    println!("End count = {count}");
+}
+```
+루프 속 루프가 있다면 루프 라벨로 지정하여 제어가능(루프 라벨은 반드시 작은 따옴표로 시작)
+
+```rust
+fn main() {
+    let mut number = 3;
+
+    while number != 0 {
+        println!("{number}!");
+
+        number -= 1;
+    }
+
+    println!("LIFTOFF!!!");
+}
+```
+while로 true인 동안 루프 순회
+
+```rust
+fn main() {
+    let a = [10, 20, 30, 40, 50];
+
+    for element in a {
+        println!("the value is: {element}");
+    }
+}
+```
+for문으로 배열의 요소를 순회
