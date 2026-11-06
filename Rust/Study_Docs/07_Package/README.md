@@ -138,4 +138,105 @@ pub fn eat_at_restaurant() {
     let order2 = back_of_house::Appetizer::Salad;
 }
 ```
-열거형의 경우 배리언트는 기본적으로 공개ㄴ
+열거형의 경우 배리언트는 기본적으로 공개형
+
+# 7.4. use 키워드
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+}
+```
+단축키처럼 짧게 모듈을 가져옴
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+use crate::front_of_house::hosting;
+
+// 문제
+mod customer {
+    pub fn eat_at_restaurant() {
+        hosting::add_to_waitlist(); // 오류가 발생하는 곳
+    }
+}
+
+// 해결방법 1
+mod customer {
+    // customer 모듈 내부로 use 문 이동
+    use crate::front_of_house::hosting;
+
+    pub fn eat_at_restaurant() {
+        hosting::add_to_waitlist(); // 정상 컴파일됨
+    }
+}
+
+// 해결방법 2
+mod customer {
+    pub fn eat_at_restaurant() {
+        // 부모 모듈로 거슬러 올라가서 hosting 참조
+        super::hosting::add_to_waitlist(); 
+        
+    }
+}
+```
+스코프 내부에서만 유효하므로 코드 작성에 유의
+
+```rust
+use std::fmt::Result;
+use std::io::Result as IoResult;
+
+fn function1() -> Result {
+    // --생략--
+}
+
+fn function2() -> IoResult<()> {
+    // --생략--
+}
+```
+`as`를 사용하여 새 이름으로 불러오기
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+pub use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist(); // restaurant::front_of_house::hosting::add_to_waitlist()처럼 길게 작성 하지 않아도 됨
+}
+```
+`pub use`를 사용하면 직관적으로 활용가능
+
+# 7.5. 파일로 모듈 분리
+```rust
+// 파일명: src/lib.rs
+mod front_of_house;
+
+pub use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+}
+// src/front_of_house.rs 파일을 만들기전까진 컴파일 되지 않음
+
+// 파일명: src/front_of_house.rs
+pub mod hosting {
+    pub fn add_to_waitlist() {}
+}
+```
+모듈의 부모-자식 관계가 실제 컴퓨터의 폴더-파일 구조와 1:1로 정확히 일치해야 컴파일이 된다
