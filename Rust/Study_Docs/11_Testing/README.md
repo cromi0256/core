@@ -149,4 +149,89 @@ mod tests {
 ```
 Result 타입을 사용해 실패 시 다른 값 반환
 
-# 11.2. 
+# 11.2. 테스트 실행 방법 제어하기
+러스트는 기본적으로 테스트를 병렬 실행
+
+```rust
+fn prints_and_returns_10(a: i32) -> i32 {
+    println!("I got the value {}", a);
+    10
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn this_test_will_pass() {
+        let value = prints_and_returns_10(4);
+        assert_eq!(10, value);
+    }
+
+    #[test]
+    fn this_test_will_fail() {
+        let value = prints_and_returns_10(8);
+        assert_eq!(5, value);
+    }
+}
+```
+성공한 테스트의 출력을 자동으로 캡처하며, 실패한 테스트의 출력은 실패 메시지 아래에 표시
+
+```bash
+# 모든 테스트 병렬 실행 (기본)
+cargo test
+
+# 특정 테스트 실행
+cargo test my_test_function
+
+# 특정 테스트 이름 포함 필터링
+cargo test add
+
+# 무시된 테스트만 실행  #[ignore] 어노테이션으로 특정 테스트를 무시
+cargo test -- --ignored
+
+# 성공한 테스트 출력 보기
+cargo test --show-output
+```
+
+# 11.3. 테스트 조직화
+하나의 모듈을 독립적으로 테스트하는 유닛 테스트와 라이브러리와 완전히 분리되어 실행하는 통합 테스트
+
+```rust
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn it_works() {
+        let result = 2 + 2;
+        assert_eq!(result, 4);
+    }
+}
+```
+유닛 테스트 구조:
+
+* src/lib.rs 파일 생성
+* #[cfg(test)] 어노테이션 사용
+* 테스트 코드는 cargo build 시 제외됨
+* 비공개 함수 테스트: use super::*로 부모 모듈의 항목 가져오기
+
+```
+adder
+├── Cargo.lock
+├── Cargo.toml
+├── src
+│   └── lib.rs
+└── tests   
+    └── integration_test.rs
+```
+통합 테스트는 `src` 디렉터리 외부의 `tests` 디렉터리 생성
+
+```rust
+// tests/integration_test.rs
+use adder;  // use 문법으로 라이브러리 참조
+
+#[test]
+fn it_adds_two() {
+    assert_eq!(4, adder::add_two(2));
+}
+```
+통합 테스트 파일의 예시
