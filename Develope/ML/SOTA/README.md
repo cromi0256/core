@@ -2,25 +2,48 @@
 ML&AI 엔지니어링과 관련된 핵심 지식을 정리중입니다
 
 ## AutoML
-[AutoGluon](https://auto.gluon.ai/stable/index.html)
+[mljar](https://github.com/mljar/mljar-supervised)
 
 앙상블과 스태킹, 그리고 파운데이션 모델을 사용한 빠른 프로토타입핑
 
-```
-from autogluon.tabular import TabularDataset, TabularPredictor
+특성 발견과 예측 설명 기능도 포함
 
-data_root = 'https://autogluon.s3.amazonaws.com/datasets/Inc/'
-train_data = TabularDataset(data_root + 'train.csv')
-test_data = TabularDataset(data_root + 'test.csv')
-
-predictor = TabularPredictor(label='class').fit(train_data)
-predictions = predictor.predict(test_data)
+```bash
+python -m pip install 'mljar-supervised==1.4.0rc6'
 ```
 
-단 3줄로 복잡한 코딩없이 빠른 모델 설계
+```python
+from sklearn.datasets import load_iris
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from supervised import AutoML
 
-## 모델설계과정
-WIP
+# Predict the flower species from four measurements.
+X, y = load_iris(return_X_y=True, as_frame=True)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, stratify=y, random_state=42
+)
+
+automl = AutoML(
+    results_path="AutoML_Iris",
+    mode="Explain",
+    algorithms=["Baseline", "Decision Tree", "Linear", "LightGBM"],
+    total_time_limit=120,
+    n_jobs=2,
+)
+automl.fit(X_train, y_train)
+
+predictions = automl.predict(X_test)
+print(f"Test accuracy: {accuracy_score(y_test, predictions):.1%}")
+automl.report()  # Creates AutoML_Iris/README.html.
+# Save example inputs so the reload example also works in a new Python session.
+X_test.head(3).to_csv("iris_new_rows.csv", index=False)
+```
+
+## 사이킷런 가속기
+[UXL](https://uxlfoundation.github.io/scikit-learn-intelex/latest/index.html)
+
+메모리 최적화, 스레딩, 최적화를 통한 학습&추론 가속기
 
 ## 모델 성능 향상
 [PriorLabs](https://docs.priorlabs.ai/improving-performance)
