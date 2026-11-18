@@ -4,6 +4,14 @@
 
 [깃허브](https://github.com/mljar/mljar-supervised)
 
+# 캐글 실습
+
+실습 데이터셋 : https://www.kaggle.com/competitions/playground-series-s6e11
+
+[실습코드](https://www.kaggle.com/code/kimyounghwan24/basic-automl)
+
+아주 기본적인 `explain`모드로 auc=0.69301 달성
+
 # AutoML이란
 AutoML은 데이터 전처리부터, 특성 엔지니어링, 모델 학습까지 일련의 과정을 자동으로 실행한다.
 
